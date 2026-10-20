@@ -21,6 +21,14 @@
         height:255px;
         background-color:#a3876f !important;
       }
+      body.flippedx #clickbox {
+        right:0;
+        left:255px;
+      }
+      body.flippedy #clickbox {
+        top:auto;
+        bottom:0;
+      }
         #click {
           margin-top:auto;
           width:100%;
@@ -47,24 +55,23 @@
         width:calc(100%-255px);
         height:calc(100%-255px);
       }
-        .textbox {
-          border:1px solid black;
-          margin:2px;
+      body.flippedx #elsebox {
+        right:0;
+        left:255px;
+      }
+      body.flippedy #elsebox {
+        bottom:255px;
+        top:0;
+      }
+        #basicsview {
+          margin-bottom: auto;
         }
-        #swapbox {
-          width:100%;
-          height:51px;
-          min-width:51px;
-          border:1px solid black;
-          order:67;
-          display:flex;
-          flex-direction:row;
+        #menuview {
+          margin-top: auto;
         }
-          .swapbutton {
-            width:50%;
-            height:51px;
-            min-height:51px;
+          .textbox {
             border:1px solid black;
+            margin:2px;
           }
         #retire {
           margin-top:auto;
@@ -85,6 +92,10 @@
         overflow-y:auto;
         justify-content:flex-start;
         background-color:transparent;
+      }
+      body.flippedx #modbox {
+        right:auto;
+        left:0px;
       }
       .modbutton {
         width:calc(100%-51px);
@@ -110,6 +121,16 @@
         border:0 !important;
         min-height:51px;
       }
+      #flavorbox {
+        position:fixed;
+        display:none;
+        pointer-events:none;
+        background: rgba(0, 0, 0, 0.667);
+        color:white;
+        border:1px solid white;
+        border-radius:1px;
+        z-index:999;
+      }
     </style>
   </head>
   <body>
@@ -118,7 +139,7 @@
       <button id="click"></button>
     </div>
     <div id="modbox" class="box">
-      <button class="modbutton">Clean Shave</button>
+      <button class="modbutton" flavortext="Can't tangle no hair!">Clean Shave</button>
       <button class="modbutton">Spiked Helmets</button>
       <div class="orbuttons">
         <button class="modbutton">Patriotic Dye</button>
@@ -150,23 +171,43 @@
       <button class="modbutton">Abilify</button>
     </div>
     <div id="elsebox" class="box">
-      <div id="swapbox">
-        <button class="swapbutton">Menu</button>
-        <button class="swapbutton">Basics</button>
+      <div id="basicsview">
+        <p class="textbox">Tin:<span id="tintext">0</span></p>
+        <p class="textbox">Days:0</p>
+        <button id="retire"></button>
       </div>
-      <p class="textbox" id="tintext">Tin:0</p>
-      <p class="textbox">Days:0</p>
-      <button id="retire"></button>
+      <div id="menuview">
+        <h3>Layout</h3>
+        <button id="flipx">Flip Horizontal</button>
+        <button id="flipy">Flip Vertical</button>
+        <h3>Saves</h3>
+      </div>
     </div>
+    <div id="flavorbox"></div>
     <script>
       let tin = 0;
       const clickButton = document.getElementById('click');
       const tinText = document.getElementById('tintext');
+      const flipX = document.getElementById('flipx');
+      const flipY = document.getElementById('flipy');
+      const flavorBox = document.getElementById('flavorbox');
 
       clickButton.addEventListener('click', () => {
         tin++;
-        tinText.textContent = "Tin:" + tin;
+        tinText.textContent = tin;
+
+        tinText.style.color = "white";
+        setTimeout(() => {
+          tinText.style.color = ""; //return
+        }, 100);
       });
+      flipX.addEventListener('click', () => {
+        document.body.classList.toggle('flippedx')
+      });
+      flipY.addEventListener('click', () => {
+        document.body.classList.toggle('flippedy')
+      });
+      //add tooltip logic
     </script>
   </body>
 </html>
