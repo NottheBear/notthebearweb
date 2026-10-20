@@ -3,22 +3,6 @@
   <head>
     <title>Trenchie Ticker</title>
     <style>
-      #tooltip {
-        position: fixed;
-        top:0;
-        left:0;
-        pointer-events:none;
-        transform:translateY(-100%);
-        width:102px;
-        height:102px;
-        background-color:rgba(128,128,128,0.5);
-        color:black;
-        border:solid black;
-        border-radius:1px;
-        padding:8px;
-        box-sizing:border-box;
-        z-index:999
-      }
       .box {
         position:fixed;
         min-height:20px;
@@ -129,7 +113,6 @@
     </style>
   </head>
   <body>
-    <div id="tooltip">placeholder</div>
     <div id="clickbox" class="box">
       <div id="theirtrench"></div>
       <button id="click"></button>
@@ -171,16 +154,18 @@
         <button class="swapbutton">Menu</button>
         <button class="swapbutton">Basics</button>
       </div>
-      <p class="textbox">Tin:0</p>
+      <p class="textbox" id="tintext">Tin:0</p>
       <p class="textbox">Days:0</p>
       <button id="retire"></button>
     </div>
     <script>
-      const tooltip = document.getElementById('tooltip');
+      let tin = 0;
+      const clickButton = document.getElementById('click');
+      const tinText = document.getElementById('tintext');
 
-      document.addEventListener('mousemove', (e) => {
-        tooltip.style.left = e.clientX + 'px';
-        tooltip.style.top = e.clientY + 'px';
+      clickButton.addEventListener('click', () => {
+        tin++;
+        tinText.textContent = "Tin:" + tin;
       });
     </script>
   </body>
