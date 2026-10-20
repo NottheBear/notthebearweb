@@ -4,6 +4,29 @@
     <title>About You</title>
   </head>
   <body>
-    <h1>Nothing here yet bro</h1>
+    <form action="people.php" method="GET"> <!--GET for public info, POST for private, dont worry about php, sends info there-->
+      <div>
+        <label for="name">Name or alias</label> <!--for is displayed (what to input)-->
+        <input type="text" id="name" name="name" placeholder="Avery" required> <!--only type and placeholder matters, name and id similar to class and id, required-->
+      </div>
+      <div>
+        <label for="agerange">Age range</label>
+        <select id="agerange" name="agerange"> <!--select for dropdown-->
+          <option value="-14">-14</option>
+          <option value="15-18">15-18</option>
+          <option value="19-24">19-24</option>
+          <option value="+25">25+</option>
+        </select>
+      </div>
+      <div>
+        <label for="enjoy?">Do you like?</label>
+        <input type="checkbox" id="enjoy?" name="enjoy?">
+      </div>
+      <br>
+      <div>
+        <input type="submit">
+      </div>
+      <!--many more type presets-->
+    </form>
   </body>
 </html>
