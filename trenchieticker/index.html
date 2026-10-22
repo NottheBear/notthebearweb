@@ -224,7 +224,7 @@
               tin -= cost;
               tinPerClick += boost;
               tinText.textContent = tin;
-              const parentContainer = button.closest('.orbuttons'); //cant buy second orbutton
+              const parentContainer = button.closest('.orbuttons'); //cant buy second orbutton, buying doesnt cost tin
               if (parentContainer) {
                 const siblingButtons = parentContainer.querySelectorAll('.modbutton');
                 siblingButtons.forEach(sib => {
