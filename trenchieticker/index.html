@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--make mods work, retire conversion, saves 1 2 3, show tinperclick on tinbutton, phone notes, runnermen times and plus, hidden mods-->
 <html>
   <head>
     <title>Trenchie Ticker</title>
@@ -136,30 +136,30 @@
   <body>
     <div id="clickbox" class="box">
       <div id="theirtrench"></div>
-      <button id="click"></button>
+      <button id="click" flavortext="Click!"></button>
     </div>
     <div id="modbox" class="box">
-      <button class="modbutton" flavortext="Can't tangle no hair!">Clean Shave</button>
-      <button class="modbutton">Spiked Helmets</button>
+      <button class="modbutton" flavortext="Can't tangle no hair! (+1 Tin)">Clean Shave<br>[25 Tin]</button>
+      <button class="modbutton" flavortext="No reason, why? (+1 Tin)">Spiked Helmets<br>[100 Tin]</button>
       <div class="orbuttons">
-        <button class="modbutton">Patriotic Dye</button>
-        <button class="modbutton">Camoflage</button>
+        <button class="modbutton" flavortext="Do we have enough paint?.. What do you mean dye? (+0 Tin)">Patriotic Dye<br>[25 Tin]</button>
+        <button class="modbutton" flavortext="'I didn't see you at practice today.' 'Thank you sir.' (+1 Tin)">Camoflage<br>[100 Tin]</button>
       </div>
-      <button class="modbutton">Eye Drying Treatment</button>
+      <button class="modbutton" flavortext="The perfect counter to those flares. (+2 Tin)">Eye Drying Treatment<br>[1000 Tin]</button>
       <div class="andbuttons">
-        <button class="modbutton">Cat Food Cans</button>
-        <button class="modbutton">Rats</button>
+        <button class="modbutton" flavortext="For cat food, what else? (+0 Tin)">Cat Food Cans<br>[50 Tin]</button>
+        <button class="modbutton" flavortext="For cat food, what else? (+0 Tin)">Rats<br>[-25 Tin]</button>
       </div>
-      <button class="modbutton">Trench Cats</button>
+      <button class="modbutton" flavortext="They die as often as people. (+2 Tin)">Trench Cats<br>[1500 Tin]</button>
       <div class="orbuttons">
-        <button class="modbutton">Gun Safety Training</button>
-        <button class="modbutton">Aim Training</button>
+        <button class="modbutton" flavortext="The worst thing is to hit an ally. (+1 Tin)">Gun Safety Training<br>[2000 Tin]</button>
+        <button class="modbutton" flavortext="The worst thing is to miss a shot. (+1 Tin)">Aim Training<br>[1000 Tin]</button>
       </div>
-      <button class="modbutton">Acid Resistance Training</button>
-      <button class="modbutton">Salt</button>
+      <button class="modbutton" flavortext="Resilient fucks already got used to the poison. (+2 Tin)">Acid Resistance Training<br>[3000 Tin]</button>
+      <button class="modbutton" flavortext="For the snow to come. (+0 Tin)">Salt<br>[2000 Tin]</button>
       <div class="orbuttons">
-        <button class="modbutton">Lobotomies</button>
-        <button class="modbutton">Fireworks</button>
+        <button class="modbutton" flavortext="To make them happy. (+2000 Tin)">Lobotomies<br>[5000 Tin]</button>
+        <button class="modbutton" flavortext="To make them happy. (+200 Tin)">Fireworks<br>[5000 Tin]</button>
       </div>
       <button class="fakemodbutton"></button>
       <button class="fakemodbutton"></button>
@@ -167,14 +167,14 @@
       <button class="fakemodbutton"></button>
       <button class="fakemodbutton"></button>
       <button class="fakemodbutton"></button>
-      <button class="modbutton">The Greatest War</button>
-      <button class="modbutton">Abilify</button>
+      <button class="modbutton" flavortext="+1 Gazillion Tin">The Greatest War<br>[1914916 Tin]</button>
+      <button class="modbutton" flavortext="I don't need this at all.">Abilify<br>[2 Dollars]</button>
     </div>
     <div id="elsebox" class="box">
       <div id="basicsview">
         <p class="textbox">Tin:<span id="tintext">0</span></p>
         <p class="textbox">Days:0</p>
-        <button id="retire"></button>
+        <button id="retire" flavortext="Convert upgrades to days."></button>
       </div>
       <div id="menuview">
         <h3>Layout</h3>
@@ -207,7 +207,26 @@
       flipY.addEventListener('click', () => {
         document.body.classList.toggle('flippedy')
       });
-      //add tooltip logic
+
+      const allButtons = document.querySelectorAll('button');
+
+      allButtons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          const text = button.getAttribute('flavortext');
+          if (text) {
+            flavorBox.textContent = text;
+            flavorBox.style.display = 'block';
+          }
+        });
+        button.addEventListener('mousemove', (e) => {
+          flavorBox.style.left = (e.clientX + 12) + 'px';
+          flavorBox.style.top = (e.clientY + 12) + 'px';
+        })
+        button.addEventListener('mouseleave', () => {
+          flavorBox.textContent = '';
+          flavorBox.style.display = 'none';
+        });
+      });
     </script>
   </body>
 </html>
